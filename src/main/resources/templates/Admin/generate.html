@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="Admin/base::Layout(~{::section})">
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<meta charset="UTF-8">
+<title>Electricity Billing System</title>
+</head>
+
+<body>
+	
+		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+  	               	     <p class="text-center" th:text="${session.message.content}"></p>  	               	     
+  	               	     <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		             </div>
+	             
+<section>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/generate.js"></script>
+<script src="/js/billvalidation.js"></script>
+	
+ <div id="postResultDiv" align="center"></div>	
+<div class="container">
+
+ <div th:if="${param.success}">
+    	<div class="alert alert-info">You've successfully added a energy!!!!!</div> 
+    		</div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" >
+           
+                <h1 style="text-align: center;color:blue;">Generate Bill</h1><hr>
+                <form class="form-horizontal" th:action="@{/admin/generatebill}"  id="addBills" name="addBills" onsubmit="validateForm()" method="post" th:object="${customer}">
+                 <div class="form-group">
+                        <label class="control-label col-sm-3" for="name">Name:</label>
+                        <div class="col-sm-8">
+                          <input th:value="${customer.name}" type="text" class="form-control"  placeholder="Enter Name" id="name" name="name" readonly >
+                        </div>
+                      </div><br>
+                <div class="form-group">
+                        <label class="control-label col-sm-3" for="meter">Meter:</label>
+                        <div class="col-sm-8">
+                          <input th:value="${customer.meter}" type="text" class="form-control"  placeholder="Enter Meter" id="meter" name="meter" readonly >
+                        </div>
+                      </div><br>
+                       <div class="form-group">
+                        <label class="control-label col-sm-3" for="metertype">Meter Type:</label>
+                        <div class="col-sm-8">
+                          <input type="text" th:value="${customer.metertype}" class="form-control"  placeholder="Enter Meter Type" id="metertype" name="metertype" readonly  >
+                         
+                        </div>
+                         </div><br>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="board">Board:</label>
+                        <div class="col-sm-8">
+                          <input th:value="${customer.board}" type="text" class="form-control"  placeholder="Enter Board" id="board" name="board" readonly >
+                        </div>
+                      </div><br>
+                      <div class="form-group">
+                        <label class="control-label col-sm-3" for="bconntype">Connection Type:</label>
+                        <div class="col-sm-8">
+                          <input type="text" th:value="${customer.conntype}" class="form-control"  placeholder="Enter Connection Type" id="bconntype" name="bconntype" readonly >
+                         
+                        </div>
+                         </div><br>
+                        
+                         <div class="form-group">
+                        <label class="control-label col-sm-3" for="energy">Energy:</label>
+                        <div class="col-sm-8">
+                          <input type="text"  class="form-control"  placeholder="Enter Energy" id="energy" name="energy"   >
+                          <div class="error" id="energyErr"></div>
+                        </div>
+                      </div><br>
+                      <div class="form-group">
+                        <label class="control-label col-sm-3" for="date">Date:</label>
+                        <div class="col-sm-8">
+                      <input type="date"  class="form-control"  placeholder="Enter Date" id="date" name="date"   >
+                       <div class="error" id="dateErr"></div>
+                        </div>
+                      </div><br>
+                      <div class="form-group">        
+                      <div class="col-sm-offset-3 col-sm-8">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                         <button type="reset" class="btn btn-primary btn-block">Reset</button>
+                      </div>
+                    </div>
+                    <hr>
+                </form>
+                
+
+            </div>
+
+        </div>
+
+    </div>
+ 
+</section>
+
+</body>
+</html>
