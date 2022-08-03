@@ -7,6 +7,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -36,7 +38,7 @@ public class CustomerRestController {
 	private BillService billService;
 
 	@RequestMapping(method=RequestMethod.POST,value = "/customers")
-	public void addCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
 	
 		try {
 			
@@ -47,6 +49,7 @@ public class CustomerRestController {
 		}catch (Exception e) {
 			
 		}
+		return new ResponseEntity<>("Customer created successsfully", HttpStatus.CREATED);
 		
 	}
 	@RequestMapping(method=RequestMethod.POST,value = "/customers/meter")

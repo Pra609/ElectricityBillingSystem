@@ -1,4 +1,4 @@
-package com.electricity.system.controller;
+package com.electricity.system.view;
 
 
 import org.springframework.stereotype.Controller;

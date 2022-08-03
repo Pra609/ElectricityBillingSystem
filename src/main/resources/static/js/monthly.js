@@ -27,6 +27,13 @@ function incPageNo()
 {
 	let page=Number($('#customerPageNo').text())
 	//console.log(page,'prev')
+	let datalength=globleTableData.length;
+	let pagelimit=Math.ceil((datalength/5.0));
+	if(page+1>pagelimit)
+	{
+		console.log('Page limit reached');	
+		return;	
+	}
 	pagedata(page+1);
 	$('#customerPageNo').text(page+1)
 }

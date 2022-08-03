@@ -26,5 +26,11 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer>{
 	
 	@Query("from Customer r inner join fetch r.bill where r.id = :id")
 	  Customer findBillById(@Param("id") int id);
+	
+	@Query("SELECT a from  Customer a WHERE  a.board LIKE %?1%"+" OR a.conntype LIKE %?1%"+" OR a.meter LIKE %?1%"+" OR a.contact LIKE %?1%"+" OR a.name LIKE %?1%"+" OR a.email LIKE %?1%" +" OR a.id LIKE %?1%"+" OR a.metertype LIKE %?1%")
+	public List<Customer> getcustomerByKeywordandpage(String keyword);
+	
+	@Query("SELECT a from  Customer a WHERE  a.board LIKE %?1%"+" OR a.conntype LIKE %?1%"+" OR a.meter LIKE %?1%"+" OR a.contact LIKE %?1%"+" OR a.name LIKE %?1%"+" OR a.email LIKE %?1%" +" OR a.id LIKE %?1%"+" OR a.metertype LIKE %?1%")
+	public Page<Customer> getcustomerByKeywordandPage(String keyword,Pageable pageable);
 }
 

@@ -27,6 +27,13 @@ function incPageNo()
 {
 	let page=Number($('#customerPageNo').text())
 	//console.log(page,'prev')
+	let datalength=globleTableData.length;
+	let pagelimit=Math.ceil((datalength/5.0));
+	if(page+1>pagelimit)
+	{
+		console.log('Page limit reached');	
+		return;	
+	}
 	pagedata(page+1);
 	$('#customerPageNo').text(page+1)
 }
@@ -150,11 +157,11 @@ $(document).delegate('.edit', 'click', function() {
 	
 	
     var buttons = parent.children("td:nth-child(9)");    
-
+     var coption=board.children("input[type=text]").val();
     name.html("<input type='text' id='board' value='" + name.html() + "'/>");
     meter.html("<input type='text' id='board' value='" + meter.html() + "'/>");
     let boarddropdown=`<select id="board" name="board" style="padding: 4px;">
-
+                                  
 									<option value="Andhra Pradesh">Andhra Pradesh</option>
                                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</opt>
                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -228,7 +235,24 @@ $(document).delegate('#save', 'click', function() {
 	
 	console.log('hello ',conntype.find(":selected").text());
     var buttons = parent.children("td:nth-child(9)");
- 
+    
+
+ let contactErr=false;
+ if(contact.children("input[type=text]").val() == "") {
+        alert( "Please enter your contact number");
+    } else {
+        var regex = /^[0-9]{10}$/;
+        if(regex.test(contact.children("input[type=text]").val()) == false) {
+	        console.log(regex.test(contact.children("input[type=text]").val()))
+			contactErr=true
+            alert("Please enter a valid 10 digit contact number");
+        } else{
+          
+            contactErr = false;
+        }
+    }
+    
+ 	if(!contactErr)
 	$.ajax({
 		type: "POST",
 		contentType: "application/json; charset=utf-8",

@@ -1,9 +1,11 @@
-package com.electricity.system.controller;
+package com.electricity.system.view;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.electricity.system.entity.Customer;
-
+import com.electricity.system.repo.CustomerRepo;
 import com.electricity.system.service.CustomerService;
 
 
@@ -27,6 +29,10 @@ public class AdminViewController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CustomerRepo customerRepo;
+	
 	@RequestMapping("/home")
 	public String adminHome() {
 		return "Admin/adminhome";
@@ -55,8 +61,8 @@ public class AdminViewController {
 	public String viewCustomersMeter(@PathVariable("page") Integer page,Model model) {
 		model.addAttribute("title", "All Customers");
 		
-		
-       Page<Customer> customer=customerService.getAllCustomers(page);
+		Pageable pageable = PageRequest.of(page, 5);
+       Page<Customer> customer=customerService.getAllCustomers(pageable);
 		model.addAttribute("customer", customer);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", customer.getTotalPages());
@@ -78,16 +84,28 @@ public class AdminViewController {
 	return "Admin/viewcustomer";
 	}
 	
-	@RequestMapping("/search")
-	public String searchBook(@Param("keyword") String keyword,Model model) {
+	@RequestMapping("/search/{page}")
+	public String search(@PathVariable("page") Integer page,String keyword,Model model) {
 		
-	   if(keyword==null) {
-		   List<Customer> customer=customerService.getAllcustomers();
-		   model.addAttribute("customer",customer);
+	 if(keyword==null) {
+		  Pageable pageable = PageRequest.of(page, 5);
+		   Page<Customer> customer=customerService.getAllCustomers(pageable);
+		  // Page<Customer> customer=customerService
+		  // List<Customer> customer=customerService.getAllcustomers();
+		   model.addAttribute("customer", customer);
+		  // model.addAttribute("customer",customer);
+		 // model.addAttribute("totalPages", customer.getTotalPages());
 	   }
 	   else {
-		   List<Customer> customer=customerService.getByKeyword(keyword);
-		   model.addAttribute("customer",customer);
+		   //List<Customer> customer=customerService.getByKeyword(keyword);
+		    Pageable pageable = PageRequest.of(page, 5);
+		    Page<Customer> customer=customerRepo.getcustomerByKeywordandPage(keyword, pageable);
+		   //Page<Customer> customer=customerService.getAllCustomersbykeyword(keyword, page);
+			model.addAttribute("currentPage", page);
+		   model.addAttribute("customer", customer);
+		   //model.addAttribute("customer",customer);
+		   model.addAttribute("totalPages", customer.getTotalPages());
+		   model.addAttribute("keyword", keyword);
 	   }
 		
 		

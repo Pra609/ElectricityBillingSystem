@@ -4,9 +4,11 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,9 +43,11 @@ public class AdminRestController {
 	@Autowired
 	private ConsumptionService cService;
 	
-	@RequestMapping(method=RequestMethod.POST,value = "/addrates")
-	public void addRates(@RequestBody Rate rate) {
+	@PostMapping("/addrates")
+	public ResponseEntity<Object> addRates(@RequestBody Rate rate) {
 		rateService.saveRates(rate);
+		
+		return new ResponseEntity<>("Rates added successsfully", HttpStatus.CREATED);
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/updaterate")
 	public Rate updateRate(@RequestBody Rate rate) {	
@@ -54,8 +58,9 @@ public class AdminRestController {
 	
 	
 	@RequestMapping(method = RequestMethod.DELETE,value="/deleterate/{rid}")
-	public void deleteRates(@PathVariable int rid) {
+	public ResponseEntity<Object> deleteRates(@PathVariable int rid) {
 		rateService.deleteRate(rid);
+		return new ResponseEntity<>("Rates deleted successsfully", HttpStatus.OK);
 	}
 	
 	
@@ -109,7 +114,7 @@ public class AdminRestController {
 //	}
 	
 	@GetMapping("/viewbills")
-	public List<Bill> viewAllBills(@RequestParam String keyword) {
+	public List<Bill> viewAllBills(String keyword) {
 		
 		if(keyword==null) {
 		List<Bill> allBills =billService.generateBills();
@@ -136,7 +141,7 @@ public class AdminRestController {
 	}
 	
 	@GetMapping("/viewcustomers")
-	public List<Customer> viewAllustomers(@RequestParam String keyword) {
+	public List<Customer> viewAllustomers( String keyword) {
 		
 		if(keyword==null) {
 	
@@ -155,6 +160,16 @@ public class AdminRestController {
 	
 		
 	}
+	
+	/*@GetMapping("/viewcustomers")
+	public List<Customer> viewAllcustomers() {
+		
+		
+		List<Customer> customers=customerService.getAllcustomers();
+			return customers;
+		
+			
+		}*/
 //	
 //	@GetMapping("/viewcustomersbypage")
 //	public List<Customer> viewAllustomersbypage(@RequestParam String keyword,int pageno) {

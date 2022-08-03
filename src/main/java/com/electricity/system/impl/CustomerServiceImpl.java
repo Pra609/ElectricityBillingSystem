@@ -53,12 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepo.getById(id);
 	}
 
-	@Override
-	public Page<Customer> getAllCustomers(Integer page) {
-		 Pageable pageable = PageRequest.of(page, 5);
-		return customerRepo.findAll(pageable);
-	}
-
+	
 	
 	
 	@Override
@@ -118,6 +113,27 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return customerRepo.findAll();
 	}
+
+	@Override
+	public Page<Customer> getAllCustomers(Pageable pageable) {
+		
+		return customerRepo.findAll(pageable);
+	}
+
+	@Override
+	public Page<Customer> getAllCustomersbykeyword(String keyword, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return customerRepo.getcustomerByKeywordandPage(keyword, pageable);
+	}
+
+	
+	
+
+	/*@Override
+	public Page<Customer> getAllCustomersbykeyword(Integer page) {
+		Pageable pageable = PageRequest.of(page, 5);
+		 Page<Customer> customer=customerRepo.getcustomerByKeywordandPage(keyword, pageable);
+	}*/
 
 //	@Override
 //	public Page<Customer> getAllCustomersbypageno(String keyword, Integer page) {

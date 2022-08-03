@@ -18,7 +18,7 @@ th:replace="Admin/base::Layout(~{::section})"
         <h1>Generate Bill</h1>
         
          <div class="container my-2">
-             <form class="form-horizontal" th:action="@{/admin/search}"  method="post" th:object="${customer}">
+             <form class="form-horizontal" th:action="@{/admin/search/0}"  method="post" th:object="${customer}">
                    <div>
 									<input class="form-control me-2 mt-2" type="search"
 										id="keyword" name="keyword" placeholder="Search"
@@ -61,7 +61,7 @@ th:replace="Admin/base::Layout(~{::section})"
              
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation example">
 		<ul class="pagination">
 		<li th:if="${currentPage !=0}" class="page-item"><a th:href="@{'/admin/viewcustomers/'+${currentPage-1}}" class="page-link" href="#">Previous</a></li>
 		<li th:classappend="${currentPage==i-1?'active':''}"  th:each="i: ${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/admin/viewcustomers/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
