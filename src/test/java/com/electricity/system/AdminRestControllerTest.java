@@ -58,26 +58,6 @@ public class AdminRestControllerTest extends AbtractTest{
 
 	    }
 	
-	/*@Test
-	   public void getCustomersList() throws Exception {
-	      String uri = "/viewcustomers";
-	     // String keyword;
-//	      
-//	        Customer customer =new Customer();
-//	        List<Customer> list=new ArrayList<>();
-//	        list.add(customer);
-		      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-		    	         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-		    	      
-		    	      int status = mvcResult.getResponse().getStatus();
-		    	      assertEquals(200, status);
-		    	      String content = mvcResult.getResponse().getContentAsString();
-		    	      Customer[] customer = super.mapFromJson(content, Customer[].class);
-		    	      assertTrue(customer.length > 0);
-	      
-	     
-	     
-	   }*/
 	
 	@Test
 	   public void createBill() throws Exception {
@@ -107,11 +87,7 @@ public class AdminRestControllerTest extends AbtractTest{
 	@Test
 	   public void getEnergyList() throws Exception {
 	      String uri = "/viewenergy";
-	     // String keyword;
-//	      
-//	        Customer customer =new Customer();
-//	        List<Customer> list=new ArrayList<>();
-//	        list.add(customer);
+	  
 		      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
 		    	         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		    	      
@@ -128,11 +104,7 @@ public class AdminRestControllerTest extends AbtractTest{
 	@Test
 	   public void getBillsList() throws Exception {
 	      String uri = "/viewbills";
-	     // String keyword;
-//	      
-//	        Customer customer =new Customer();
-//	        List<Customer> list=new ArrayList<>();
-//	        list.add(customer);
+	
 		      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
 		    	         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		    	      
@@ -149,11 +121,7 @@ public class AdminRestControllerTest extends AbtractTest{
 	@Test
 	   public void getCustomersList() throws Exception {
 	      String uri = "/viewcustomers";
-	     // String keyword;
-//	      
-//	        Customer customer =new Customer();
-//	        List<Customer> list=new ArrayList<>();
-//	        list.add(customer);
+	    
 		      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
 		    	         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		    	      
@@ -192,7 +160,7 @@ public class AdminRestControllerTest extends AbtractTest{
 	
 	   @Test
 	   public void deleterate()throws Exception {
-	      String uri = "/deleterate/197";
+	      String uri = "/deleterate/199";
 	      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 	      int status = mvcResult.getResponse().getStatus();
 	      assertEquals(200, status);

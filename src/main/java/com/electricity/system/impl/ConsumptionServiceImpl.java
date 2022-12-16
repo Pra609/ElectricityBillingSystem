@@ -25,7 +25,7 @@ public class ConsumptionServiceImpl implements ConsumptionService{
 		int e=bill.getEnergy();
 	
 		Date d=bill.getDate();
-		int en=bill.getEnergy();
+		//int en=bill.getEnergy();
 		 Calendar cal = Calendar.getInstance();
 		 cal.setTime(d);
 		 int  mo=cal.get(Calendar.MONTH);

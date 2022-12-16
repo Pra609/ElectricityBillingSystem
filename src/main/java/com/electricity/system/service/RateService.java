@@ -2,7 +2,7 @@ package com.electricity.system.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
+
 
 import com.electricity.system.entity.Rate;
 

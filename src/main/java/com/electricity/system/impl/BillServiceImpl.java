@@ -2,8 +2,6 @@ package com.electricity.system.impl;
 
 
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -14,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.electricity.system.entity.Bill;
-import com.electricity.system.entity.Consumption;
+
 import com.electricity.system.entity.Customer;
 import com.electricity.system.entity.Rate;
 import com.electricity.system.repo.BillRepo;
-import com.electricity.system.repo.ConsumptionRepo;
+
 import com.electricity.system.service.BillService;
 import com.electricity.system.service.CustomerService;
 import com.electricity.system.service.RateService;
@@ -39,17 +37,16 @@ public class BillServiceImpl implements BillService{
     @Autowired
     private ConsumptionService conService;
     
-    @Autowired
-    private ConsumptionRepo crepo;
+   
     
     @Autowired
     private CustomerService customerService;
 	@Override
 	public void saveBill(Bill bill) {
-		int id=bill.getBillid();
+		//int id=bill.getBillid();
 		 int m=bill.getMeter();
 		 Customer customer=customerService.getByMeter(m);
-		 String name=customer.getName();
+		 //String name=customer.getName();
 		 //bill.setName(name);
 		 System.out.println(m);
 		String board=bill.getBoard();
@@ -84,7 +81,7 @@ public class BillServiceImpl implements BillService{
 
 	@Override
 	public List<Bill> generateBills() {
-		// TODO Auto-generated method stub
+		
 	return billRepo.findAll();
 		
 	}

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.electricity.system.entity.Bill;
-import com.electricity.system.entity.Rate;
+
 
 
 
